@@ -11,7 +11,7 @@ parser.add_argument('-s', '--size', help='Tamaño de la imagen de salida en pixe
 parser.add_argument('-n', '--numberimages', type=int, help='Cantidad de imágenes por giro', required=False, default=60)
 parser.add_argument('-r', '--numberRotations', type=int, help='Cantidad de giros', required=False, default=5)
 parser.add_argument('-a', '--anglePerRotation', type=int, help='cuanto se eleva por cada rotación', required=False, default=10)
-
+parser.add_argument('-d', '--distanceOrRadio', type=int, help='radio de la cámara', required=False, default=60)
 # Analiza los argumentos de la línea de comandos
 args = parser.parse_args()
 
@@ -21,5 +21,5 @@ if not os.path.exists(args.output):
     os.makedirs(args.output)
 
 if __name__ == '__main__':
-    pv = Paraview(input=args.input, size=args.size, numberimages=args.numberimages, numberRotations=args.numberRotations, anglePerRotation=args.anglePerRotation, radius=60, output=args.output)
+    pv = Paraview(input=args.input, size=args.size, numberimages=args.numberimages, numberRotations=args.numberRotations, anglePerRotation=args.anglePerRotation, radius=args.distanceOrRadio, output=args.output)
     pv.start()
