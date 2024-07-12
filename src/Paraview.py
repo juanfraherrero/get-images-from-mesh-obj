@@ -76,17 +76,22 @@ class Paraview:
     self.init_azimut = init_azimut
     self.end_azimut = end_azimut
     self.cant_step_azimut = cant_step_azimut
+    self.center = self.renderView.CameraFocalPoint
 
-  def set_background_color(self, color: List[int, int, int]):
+  def set_background_color(self, color: List[float]):
       """
       Set background color
       """
+      if len(color) != 3:
+        raise ValueError("The 'color' list must contain exactly three float numbers.")
       self.renderView.Background = color   
   
-  def set_object_color(self, color: List[int, int, int]):
+  def set_object_color(self, color: List[float]):
       """
       Set coor of object in scene
       """
+      if len(color) != 3:
+        raise ValueError("The 'color' list must contain exactly three float numbers.")
       self.display.DiffuseColor = color
   
   def activate_ilumination(self, principal_light=0.5, fill_light=0.5):
@@ -97,10 +102,12 @@ class Paraview:
       self.renderView.KeyLightWarmth = principal_light  # adjust the color temperature of principal light
       self.renderView.FillLightWarmth = fill_light  # adjust the color temperature of fill light
   
-  def set_camera_position(self, position: List[int, int, int]):
+  def set_camera_position(self, position: List[float]):
       """
       Set position of the camera
       """
+      if len(position) != 3:
+        raise ValueError("The 'position' list must contain exactly three float numbers.")
       self.renderView.CameraPosition = position
   
   def calculate_new_position(
@@ -108,8 +115,8 @@ class Paraview:
         angle_azimut:float, 
         angle_elevation:float, 
         radius:int, 
-        center:List[int, int ,int]
-        )->List[int, int, int]:
+        center:List[float]
+        )->List[float]:
     '''
     Calculate new position based on angles
     '''
@@ -127,7 +134,7 @@ class Paraview:
                       viewOrLayout=view,
                       ImageResolution=image_resolution,
                       FontScaling='Scale fonts proportionally',
-                      OverrideColorPalette='WhiteBackground',
+                      OverrideColorPalette='BlackBackground',
                       StereoMode='No change',
                       TransparentBackground=0,
                       SaveInBackground=1,
@@ -168,7 +175,7 @@ class Paraview:
 
             # cicle over each angle to take picture
             for idx_angle_azimut, final_azimuth_angle in enumerate(angles):
-              new_position = self.calculate_new_position(final_azimuth_angle, elevation_angle, self.radius)
+              new_position = self.calculate_new_position(final_azimuth_angle, elevation_angle, self.radius, self.center)
               self.set_camera_position(new_position)
               self.renderView.CameraViewUp = [0, 0, 1]  # Adjust
               #  save screenshot
