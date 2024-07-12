@@ -29,7 +29,7 @@ class Paraview:
         self.display = Show(self.model, self.renderView)
 
         # set color to object
-        self.set_object_color([1.0, 0.0, 0.0]) # white
+        self.set_object_color([1.0, 1.0, 1.0]) # white
         
         # Asegúrate de que toda la escena esté visible
         ResetCamera(self.renderView)
@@ -94,7 +94,7 @@ class Paraview:
                         viewOrLayout=view,
                         ImageResolution=image_resolution,
                         FontScaling='Scale fonts proportionally',
-                        OverrideColorPalette='WhiteBackground',
+                        OverrideColorPalette='BlackBackground',
                         StereoMode='No change',
                         TransparentBackground=0,
                         SaveInBackground=1,
