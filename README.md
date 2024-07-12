@@ -19,6 +19,12 @@ The scripts recive several params, Rotates the object for *--numberRotations* an
 --cantStepMovement -> The quantity of movements between angles defined in movement.
 --verbose -> Show info of steps.
 ```
+
 ## Paraview Installation
 
-Must have installed Paraview, and use *pvpython* inside bin to run the script. This enable python to access paraview API.
+Must have installed Paraview, and use *pvpython* inside bin to run the script. 
+This enable python to access paraview API.
+
+Download Paraview from (link)[https://www.paraview.org/download/]
+
+*Recommend to add bin folder to PATH* else must use absolute path to pvpython!
