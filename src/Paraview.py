@@ -4,55 +4,69 @@
 #### import the simple module from the paraview
 from paraview.simple import *
 from math import sin, cos, radians
-
+from src.utils import *
 class Paraview:
-    def __init__(self, input, size, numberimages, numberRotations, anglePerRotation, radius, output):
-        """
-        Inicializa ParaView.
-        """
-        #### disable automatic camera reset on 'Show'
-        paraview.simple._DisableFirstRenderCameraReset()
+  def __init__(self, input, size, numberimages, numberRotations, anglePerRotation, radius, output, verbose, init_azimut, end_azimut, cant_step_azimut):
+    """
+    Inicializa ParaView.
+    """
+    #### disable automatic camera reset on 'Show'
+    paraview.simple._DisableFirstRenderCameraReset()
 
-        # Carga tu modelo
-        self.model = OpenDataFile(input)
+    # Elimina los objetos Paraview anteriores
+    # Obtiene todas las fuentes en la escena actual
+    sources = GetSources()
+    # Elimina cada fuente individualmente
+    for key, source in sources.items():
+        Delete(source)
+    
+    # Carga tu modelo
+    self.model = OpenDataFile(input)
 
-        # Asegúrate de que el modelo es el objeto activo
-        SetActiveSource(self.model)
+    # Asegúrate de que el modelo es el objeto activo
+    SetActiveSource(self.model)
 
-        # get active view
-        self.renderView = GetActiveViewOrCreate('RenderView')
+    # get active view
+    self.renderView = GetActiveViewOrCreate('RenderView')
 
-        # Deshabilita el eje de orientación en la vista renderizada
-        self.renderView.OrientationAxesVisibility = 0
+    # Deshabilita el eje de orientación en la vista renderizada
+    self.renderView.OrientationAxesVisibility = 0
 
-        # Display your model in the view
-        self.display = Show(self.model, self.renderView)
+    # Display your model in the view
+    self.display = Show(self.model, self.renderView)
 
-        # set color to object
-        self.set_object_color([1.0, 1.0, 1.0]) # white
-        
-        # Asegúrate de que toda la escena esté visible
-        ResetCamera(self.renderView)
+    # set color to object
+    self.set_object_color([1.0, 1.0, 1.0]) # white
+    
+    # Asegúrate de que toda la escena esté visible
+    ResetCamera(self.renderView)
 
-        # set background color to black
-        self.set_background_color([0.0, 0.0, 0.0])
+    # set background color to black
+    self.set_background_color([0.0, 0.0, 0.0])
 
-        # activate ilumination
-        # self.activate_ilumination(0.5, 0.5)
+    # activate ilumination
+    # self.activate_ilumination(0.5, 0.5)
 
-        # get layout
-        self.layout1 = GetLayout()
+    # get layout
+    self.layout1 = GetLayout()
 
-        # layout/tab size in pixels
-        self.set_layout_size(size)
-        # set parameters
-        self.size = size
-        self.center = self.renderView.CameraFocalPoint
-        self.radius = radius
-        self.numberimages = numberimages
-        self.numberRotations = numberRotations
-        self.anglePerRotation = anglePerRotation
-        self.output = output
+    # layout/tab size in pixels
+    self.set_layout_size(size)
+    # set parameters
+    self.size = size
+    self.radius = radius
+    self.numberimages = numberimages
+    self.numberRotations = numberRotations
+    self.anglePerRotation = anglePerRotation
+    self.output = output
+    self.verbose = verbose
+    self.init_azimut = init_azimut
+    self.end_azimut = end_azimut
+    self.cant_step_azimut = cant_step_azimut
+
+  def interact (self):
+    paraview.simple.Render()
+    paraview.simple.Interact()
 
     def set_background_color(self, color):
         """
@@ -94,7 +108,7 @@ class Paraview:
                         viewOrLayout=view,
                         ImageResolution=image_resolution,
                         FontScaling='Scale fonts proportionally',
-                        OverrideColorPalette='BlackBackground',
+                        OverrideColorPalette='WhiteBackground',
                         StereoMode='No change',
                         TransparentBackground=0,
                         SaveInBackground=1,
