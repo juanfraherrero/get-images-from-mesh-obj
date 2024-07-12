@@ -23,6 +23,15 @@ def get_angles_for_azimut_init (init, end, cant_steps):
     - Example:
     get_angles_for_azimut_init(0, 90, 10) -> [0.0, 9.0, 18.0, 27.0, 36.0, 45.0, 54.0, 63.0, 72.0, 81.0]
   """
+  if (not isinstance(init, (int, float))) or (not isinstance(end, (int, float))):
+    return [0.0]
+
+  if cant_steps == 0:
+    return [init]
+  
+  if init == end:
+    return [init] * cant_steps # return cant_steps of init
+  
   angles = []
 
   for step in range(cant_steps):
