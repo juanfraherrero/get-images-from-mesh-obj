@@ -48,7 +48,7 @@ def get_angles_for_azimut_from_init_angle(init, cant_steps):
 
 def convert_images_to_black_and_white(folder_path):
   """
-  Convert all images in the folder to black and white
+  Convert all images in the folder to grey scale
   """
 
   fold = os.listdir(folder_path)
