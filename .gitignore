@@ -2,3 +2,4 @@ __pycache__/
 prepare_data.py
 colmap.py
 script.sh
+config_preparing_data.json

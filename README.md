@@ -61,3 +61,12 @@ classDiagram
     }
 
 ```
+
+## Entry points
+
+```mermaid
+graph TD
+    A[Repositorio] --> B[script.sh]
+    A --> C[cli.py]
+    A --> D[run_test.py]
+```
