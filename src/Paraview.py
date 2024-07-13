@@ -12,7 +12,7 @@ class Paraview:
         self, 
         input:(str), 
         size:(int), 
-        numberimages:(int), 
+        numberImages:(int), 
         numberRotations:(int), 
         anglePerRotation:(int), 
         radius:(int), 
@@ -68,7 +68,7 @@ class Paraview:
     ## save params
     self.size = size
     self.radius = radius
-    self.numberimages = numberimages
+    self.numberImages = numberImages
     self.numberRotations = numberRotations
     self.anglePerRotation = anglePerRotation
     self.output = output
@@ -167,7 +167,7 @@ class Paraview:
           #cicle over the azimut angle for movements
           for _, azimuth_angle_init in enumerate(angles_azimuth_inits):
             
-            angles = get_angles_for_azimut_from_init_angle(azimuth_angle_init, self.numberimages)
+            angles = get_angles_for_azimut_from_init_angle(azimuth_angle_init, self.numberImages)
             
             if (self.verbose):
               print(" Starting for angle movement: ", azimuth_angle_init)
@@ -181,5 +181,5 @@ class Paraview:
               #  save screenshot
               self.save_screenshot(f"{self.output}/rot{rotation:04}_mov_{azimuth_angle_init:03}_angle{idx_angle_azimut:03}.png", self.renderView, [self.size, self.size])
               if (self.verbose):        
-                print("impreso",f"{self.output}/{(idx_angle_azimut+(self.numberimages*(rotation))):04}.png")
+                print("impreso",f"{self.output}/{(idx_angle_azimut+(self.numberImages*(rotation))):04}.png")
         

@@ -10,7 +10,7 @@ The scripts recive several params, Rotates the object for *--numberRotations* an
 --input -> Path to .obj input file.
 --output -> Path directory to store images of .obj file.
 --size -> Images size, square output.
---numberimages -> Quantity of images per rotation.
+--numberImages -> Quantity of images per rotation.
 --numberRotations -> Quantity of ratations.
 --anglePerRotation -> Angle difference between two rotations. In °.
 --distanceOrRadio -> Distance between camera and object.
@@ -40,7 +40,7 @@ classDiagram
         - layout1: any
         - size: int
         - radius: int
-        - numberimages: int
+        - numberImages: int
         - numberRotations: int
         - anglePerRotation: int
         - output: int
@@ -50,7 +50,7 @@ classDiagram
         - cant_step_azimut: int
         - center: List[float]
         
-        + Paraview(input: str, size: int, numberimages: int, numberRotations: int, anglePerRotation: int, radius: int, output: int, verbose: int, init_azimut: int, end_azimut: int, cant_step_azimut: int)
+        + Paraview(input: str, size: int, numberImages: int, numberRotations: int, anglePerRotation: int, radius: int, output: int, verbose: int, init_azimut: int, end_azimut: int, cant_step_azimut: int)
         + set_background_color(color: List[float]): void
         + set_object_color(color: List[float]): void
         + activate_ilumination(principal_light: float=0.5, fill_light: float=0.5): void
