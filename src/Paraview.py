@@ -57,7 +57,7 @@ class Paraview:
     self.set_background_color([0.0, 0.0, 0.0]) # black
 
     # activate ilumination
-    # self.activate_ilumination(0.5, 0.5)
+    self.activate_ilumination(0.5, 0.5)
 
     # get layout
     self.layout1 = GetLayout()
@@ -181,5 +181,5 @@ class Paraview:
               #  save screenshot
               self.save_screenshot(f"{self.output}/rot{rotation:04}_mov_{azimuth_angle_init:03}_angle{idx_angle_azimut:03}.png", self.renderView, [self.size, self.size])
               if (self.verbose):        
-                print("impreso",f"{self.output}/{(idx_angle_azimut+(self.numberImages*(rotation))):04}.png")
+                print("impreso",f"{self.output}/rot{rotation:04}_mov_{azimuth_angle_init:03}_angle{idx_angle_azimut:03}.png")
         
