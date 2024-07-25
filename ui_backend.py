@@ -1,7 +1,6 @@
 import subprocess
 import os
 import logging
-from sys import stderr
 
 ## CONFIG LOGGER
 log_to_file = logging.getLogger(__name__)

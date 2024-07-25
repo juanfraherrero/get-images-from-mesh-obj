@@ -1,8 +1,3 @@
-import os
-from PIL import Image
-from tqdm import tqdm
-
-
 def get_angles_for_rotation(rotations, angle):
     """
     Calcualte the angles for each rotation
@@ -56,31 +51,3 @@ def get_angles_for_azimut_from_init_angle(init, cant_steps):
         angulo_azimut = init + (360 / cant_steps) * i
         angles.append(angulo_azimut)
     return angles
-
-
-def convert_images_to_black_and_white(folder_path):
-    """
-    Convert all images in the folder to grey scale
-    """
-
-    fold = os.listdir(folder_path)
-    progress_bar_folder = tqdm(
-        total=len(os.listdir(folder_path)),
-        desc="Processing folders",
-        unit="folder",
-        leave=False,
-    )
-    for sub_folder in fold:
-        image_folder = os.path.join(folder_path, sub_folder, "images")
-        for image in os.listdir(image_folder):
-            try:
-                image_path = os.path.join(image_folder, image)
-                img = Image.open(image_path).convert("L")
-                img.save(image_path)
-            except:
-                print("Error with image: ", image_path)
-                print("Deleting dataset: ", sub_folder)
-                os.system(f"rm -rf {os.path.join(folder_path, sub_folder)}")
-                break
-        progress_bar_folder.update(1)
-    progress_bar_folder.close()

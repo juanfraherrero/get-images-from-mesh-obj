@@ -1,11 +1,7 @@
-from os import wait
-from struct import pack
 import threading
-from time import sleep
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from ui_backend import generate_images
-from typing import final
 
 
 class GetImagesFromOBJ:
@@ -273,7 +269,7 @@ class GetImagesFromOBJ:
                 cantStepMovement=steps_in_movement,
             )
         finally:
-            self.unset_loading_pop_up()
+            self.root.after(0, self.unset_loading_pop_up)
             if result != 0:
                 messagebox.showerror("Error", "The process to generate images failed")
 
@@ -294,16 +290,18 @@ class GetImagesFromOBJ:
             c = chars[i]
             self.loading_label.config(text=c)
             self.loading_label.update()
-            self.loading_popup.after(
-                100, lambda: None
-            )  # wait 100ms but avoiding sleep of python to keet ui executing
+
+            # wait 100ms but avoiding sleep of python to keet ui executing
+            self.loading_popup.after(100)
             i += 1
             if i == 4:
                 i = 0
+        if self.loading_popup is not None:
+            self.loading_popup.destroy()
+            self.loading_popup = None
 
     def unset_loading_pop_up(self):
         self.loading = False
-        self.loading_popup.destroy()
 
 
 if __name__ == "__main__":
