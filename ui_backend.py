@@ -2,7 +2,7 @@ import subprocess
 import os
 import logging
 
-## CONFIG LOGGER
+# CONFIG LOGGER
 log_to_file = logging.getLogger(__name__)
 logging.basicConfig(
     filename="app.log",
@@ -12,7 +12,7 @@ logging.basicConfig(
 )
 
 
-## FUNCTION TO RUN CLI.PY WITH PVPYTHON
+# FUNCTION TO RUN CLI.PY WITH PVPYTHON
 def generate_images(
     input,
     output,

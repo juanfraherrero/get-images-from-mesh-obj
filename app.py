@@ -15,10 +15,10 @@ class GetImagesFromOBJ:
         default_font = ("Helvetica", 16)
         self.root.option_add("*Font", default_font)
 
-        ## MENU BAR
+        # MENU BAR
         self.setMenuBar()
 
-        ## LAYOUT
+        # LAYOUT
         self.setLayout()
 
     def setMenuBar(self):
@@ -31,11 +31,11 @@ class GetImagesFromOBJ:
         self.set_accept_button()
 
     def set_basic_frame(self):
-        ## BASIC FRAME
+        # BASIC FRAME
         self.basic_frame = tk.Frame(self.root, padx=10)
         self.basic_frame.pack(side=tk.TOP, pady=10, padx=20)
 
-        ## Input file
+        # Input file
         tk.Label(self.basic_frame, text="Input:").grid(row=0, column=0, pady=10, padx=2)
         self.input_entry = tk.Entry(self.basic_frame)
         self.input_entry.grid(row=0, column=1, pady=10, padx=5)
@@ -44,7 +44,7 @@ class GetImagesFromOBJ:
         )
         self.browse_input_button.grid(row=0, column=2, pady=10, padx=10)
 
-        ## Ouput folder
+        # Ouput folder
         tk.Label(self.basic_frame, text="Output folder:").grid(
             row=1, column=0, pady=(0, 10), padx=2
         )
@@ -60,11 +60,11 @@ class GetImagesFromOBJ:
             side=tk.TOP, pady=(15, 0), padx=20, fill=tk.X
         )
 
-        ## CONFIG FRAME
+        # CONFIG FRAME
         self.config_frame = tk.Frame(self.root, padx=20)
         self.config_frame.pack(side=tk.TOP, pady=(10, 5), padx=20)
 
-        ## Size
+        # Size
         tk.Label(self.config_frame, text="Size:").grid(
             row=0, column=0, pady=(10, 5), padx=10
         )
@@ -72,7 +72,7 @@ class GetImagesFromOBJ:
         self.size.insert(0, "600")
         self.size.grid(row=0, column=1, padx=5)
 
-        ## Distance
+        # Distance
         tk.Label(self.config_frame, text="Distance of camera:").grid(
             row=1, column=0, pady=(0, 5), padx=10
         )
@@ -80,7 +80,7 @@ class GetImagesFromOBJ:
         self.distance.insert(0, "60")
         self.distance.grid(row=1, column=1, padx=5)
 
-        ## Rotations
+        # Rotations
         tk.Label(self.config_frame, text="Quantity of rotations:").grid(
             row=2, column=0, pady=(0, 5), padx=10
         )
@@ -88,7 +88,7 @@ class GetImagesFromOBJ:
         self.number_rotations.insert(0, "3")
         self.number_rotations.grid(row=2, column=1, padx=5)
 
-        ## Images per rotations
+        # Images per rotations
         tk.Label(self.config_frame, text="Number of images per rotation:").grid(
             row=3, column=0, pady=(0, 5), padx=10
         )
@@ -96,7 +96,7 @@ class GetImagesFromOBJ:
         self.images_per_rotation.insert(0, "10")
         self.images_per_rotation.grid(row=3, column=1, padx=5)
 
-        ## Angle between rotations
+        # Angle between rotations
         tk.Label(self.config_frame, text="Angle between rotations:").grid(
             row=4, column=0, pady=(0, 5), padx=10
         )
@@ -105,7 +105,7 @@ class GetImagesFromOBJ:
         self.angle_between_rotations.grid(row=4, column=1, padx=5)
 
     def set_advance_config_frame(self):
-        ## CONFIG FRAME FOR ADVANCE SETTINGS AND CHECKBOX
+        # CONFIG FRAME FOR ADVANCE SETTINGS AND CHECKBOX
         self.advance_title_frame = tk.Frame(self.root, padx=10)
         self.advance_title_frame.pack(side=tk.TOP, pady=(15, 0), padx=20, expand=False)
 
@@ -120,11 +120,11 @@ class GetImagesFromOBJ:
         )
         self.checkbox_advance_options.pack(side=tk.LEFT, padx=10)
 
-        ## CONFIG FRAME
+        # CONFIG FRAME
         self.advance_config_frame = tk.Frame(self.root, padx=10)
         # set layout in toggle functions
 
-        ## Init movement
+        # Init movement
         tk.Label(self.advance_config_frame, text="Init movement:").grid(
             row=0, column=0, pady=(0, 5), padx=10
         )
@@ -132,7 +132,7 @@ class GetImagesFromOBJ:
         self.init_movement.insert(0, "0")
         self.init_movement.grid(row=0, column=1, padx=5)
 
-        ## end movement
+        # end movement
         tk.Label(self.advance_config_frame, text="End movement").grid(
             row=1, column=0, pady=(0, 5), padx=10
         )
@@ -140,7 +140,7 @@ class GetImagesFromOBJ:
         self.end_movement.insert(0, "90")
         self.end_movement.grid(row=1, column=1, padx=5)
 
-        ## quantity of steps in movement
+        # quantity of steps in movement
         tk.Label(self.advance_config_frame, text="Quantity of steps in movement:").grid(
             row=2, column=0, pady=(0, 5), padx=10
         )
@@ -179,7 +179,7 @@ class GetImagesFromOBJ:
 
     def action_accept_button(self):
 
-        ## GET AND VALIDATE INPUTS
+        # GET AND VALIDATE INPUTS
         input = self.input_entry.get()
         output = self.output_entry.get()
 
@@ -223,7 +223,7 @@ class GetImagesFromOBJ:
             )
             return
 
-        ## GENERATE IMAGES
+        # GENERATE IMAGES
         # create thread to run subprocess, and main thread run animation
         threading.Thread(
             target=self.execute_backend,

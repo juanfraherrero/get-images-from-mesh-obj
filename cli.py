@@ -2,7 +2,7 @@ import argparse
 import os
 from src.Paraview import Paraview
 
-#### ARGUMENTOS ####
+# ARGUMENTOS #
 parser = argparse.ArgumentParser(
     description="Script of paraview to get images of .obj file"
 )
@@ -87,7 +87,7 @@ parser.add_argument(
 )
 args = parser.parse_args()
 
-## CREATE OUTPUT DIRECTORY
+# CREATE OUTPUT DIRECTORY
 if not os.path.exists(args.output):
     os.makedirs(args.output)
 

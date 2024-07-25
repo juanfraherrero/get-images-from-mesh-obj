@@ -1,6 +1,6 @@
 # ParaView controller
 
-#### import the simple module from the paraview
+# import the simple module from the paraview
 from typing import List
 from paraview.simple import *
 from math import sin, cos, radians
@@ -66,7 +66,7 @@ class Paraview:
         # set layout size in pixels
         self.layout1.SetSize(size, size)
 
-        ## save params
+        # save params
         self.size = size
         self.radius = radius
         self.numberImages = numberImages
