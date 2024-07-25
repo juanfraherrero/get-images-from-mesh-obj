@@ -1,5 +1,3 @@
-
-from math import sin, cos, radians
 import argparse
 import os
 from src.Paraview import Paraview
