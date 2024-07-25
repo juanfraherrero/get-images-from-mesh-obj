@@ -164,22 +164,22 @@ class Paraview:
           print("Rotation: ", rotation)
           print("Angle of elevation: ", rotation)
         
-          #cicle over the azimut angle for movements
-          for _, azimuth_angle_init in enumerate(angles_azimuth_inits):
-            
-            angles = get_angles_for_azimut_from_init_angle(azimuth_angle_init, self.numberImages)
-            
-            if (self.verbose):
-              print(" Starting for angle movement: ", azimuth_angle_init)
-              print(" Taking pictures for angles: ", azimuth_angle_init)
+        #cicle over the azimut angle for movements
+        for _, azimuth_angle_init in enumerate(angles_azimuth_inits):
+          
+          angles = get_angles_for_azimut_from_init_angle(azimuth_angle_init, self.numberImages)
+          
+          if (self.verbose):
+            print(" Starting for angle movement: ", azimuth_angle_init)
+            print(" Taking pictures for angles: ", azimuth_angle_init)
 
-            # cicle over each angle to take picture
-            for idx_angle_azimut, final_azimuth_angle in enumerate(angles):
-              new_position = self.calculate_new_position(final_azimuth_angle, elevation_angle, self.radius, self.center)
-              self.set_camera_position(new_position)
-              self.renderView.CameraViewUp = [0, 0, 1]  # Adjust
-              #  save screenshot
-              self.save_screenshot(f"{self.output}/rot{rotation:04}_mov_{azimuth_angle_init:03}_angle{idx_angle_azimut:03}.png", self.renderView, [self.size, self.size])
-              if (self.verbose):        
-                print("impreso",f"{self.output}/rot{rotation:04}_mov_{azimuth_angle_init:03}_angle{idx_angle_azimut:03}.png")
+          # cicle over each angle to take picture
+          for idx_angle_azimut, final_azimuth_angle in enumerate(angles):
+            new_position = self.calculate_new_position(final_azimuth_angle, elevation_angle, self.radius, self.center)
+            self.set_camera_position(new_position)
+            self.renderView.CameraViewUp = [0, 0, 1]  # Adjust
+            #  save screenshot
+            self.save_screenshot(f"{self.output}/rot{rotation:04}_mov_{azimuth_angle_init:03}_angle{idx_angle_azimut:03}.png", self.renderView, [self.size, self.size])
+            if (self.verbose):        
+              print("impreso",f"{self.output}/rot{rotation:04}_mov_{azimuth_angle_init:03}_angle{idx_angle_azimut:03}.png")
         
