@@ -58,9 +58,10 @@ jobs:
         pip install pyinstaller
         pip install -r requirements.txt
 
-    - name: Create executable with PyInstaller
+    - name: Bundle with PyInstaller
       run: |
-        pyinstaller --onefile --windowed app.py
+        chmod +x bundle_app_linux.sh
+        bash bundle_app_linux.sh
 
     - name: Upload binaries to release
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -92,9 +93,9 @@ jobs:
         pip install pyinstaller
         pip install -r requirements.txt
 
-    - name: Create executable with PyInstaller
+    - name: Bundle with PyInstaller
       run: |
-        pyinstaller --onefile --windowed app.py
+        bundle_app_windows.bat
 
     - name: Upload binaries to release
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -126,9 +127,10 @@ jobs:
         pip install pyinstaller
         pip install -r requirements.txt
 
-    - name: Create executable with PyInstaller
+    - name: Bundle with PyInstaller
       run: |
-        pyinstaller --onefile --windowed app.py
+        chmod +x bundle_app_linux.sh
+        bash bundle_app_linux.sh
 
     - name: Upload binaries to release
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
