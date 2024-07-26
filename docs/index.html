@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+</head>
+<body>
+  <h1 id="get-images-from-obj-file">Get images from .OBJ file</h1>
+<p>This repo contains script to retrieve, with paraview, a sequence of images from .obj object file. </p>
+<h2 id="how-it-works">How it works</h2>
+<p>The scripts recive several params, Rotates the object for <em>--numberRotations</em> and each rotation is spaceing by <em>--anglePerRotation</em>. The rotations is over the y axis. Each rotation starts to take <em>--numberImages</em> images equally distributed over the axis. And for the movement, normally to obtain more data when using 4 as <em>--numberImages</em>, setting 0° to 90° by 10° the movement, this enables us to get more view angles.</p>
+<pre><code class="lang-txt">--<span class="hljs-function"><span class="hljs-title">input</span> -&gt;</span> Path to .obj input file.
+--<span class="hljs-function"><span class="hljs-title">output</span> -&gt;</span> Path directory to store images of .obj file.
+--<span class="hljs-function"><span class="hljs-title">size</span> -&gt;</span> Images size, square output.
+--<span class="hljs-function"><span class="hljs-title">numberImages</span> -&gt;</span> Quantity of images per rotation.
+--<span class="hljs-function"><span class="hljs-title">numberRotations</span> -&gt;</span> Quantity of ratations.
+--<span class="hljs-function"><span class="hljs-title">anglePerRotation</span> -&gt;</span> Angle difference between two rotations. In °.
+--<span class="hljs-function"><span class="hljs-title">distanceOrRadio</span> -&gt;</span> Distance between camera <span class="hljs-built_in">and</span> object.
+--<span class="hljs-function"><span class="hljs-title">initMovement</span> -&gt;</span> The angle <span class="hljs-keyword">where</span> starts the movement <span class="hljs-keyword">for</span> each rotation.
+--<span class="hljs-function"><span class="hljs-title">endMovement</span> -&gt;</span> The angle <span class="hljs-keyword">where</span> ends the movement <span class="hljs-keyword">for</span> each rotation.
+--<span class="hljs-function"><span class="hljs-title">cantStepMovement</span> -&gt;</span> The quantity of movements between angles defined <span class="hljs-built_in">in</span> movement.
+--<span class="hljs-function"><span class="hljs-title">verbose</span> -&gt;</span> Show info of steps.
+</code></pre>
+<h2 id="paraview-installation">Paraview Installation</h2>
+<p>Must have installed Paraview, and use <em>pvpython</em> inside bin to run the script. 
+This enable python to access paraview API.</p>
+<p>Download Paraview from (link)[<a href="https://www.paraview.org/download/">https://www.paraview.org/download/</a>]</p>
+<p><em>Recommend to add bin folder to PATH</em> else must use absolute path to pvpython!</p>
+<h2 id="class-diagram">Class Diagram</h2>
+<pre><code class="lang-mermaid">classDiagram
+    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Paraview</span> {</span>
+        - <span class="hljs-string">model:</span> any
+        - <span class="hljs-string">renderView:</span> any
+        - <span class="hljs-string">display:</span> any
+        - <span class="hljs-string">layout1:</span> any
+        - <span class="hljs-string">size:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">radius:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">numberImages:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">numberRotations:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">anglePerRotation:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">output:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">verbose:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">init_azimut:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">end_azimut:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">cant_step_azimut:</span> <span class="hljs-keyword">int</span>
+        - <span class="hljs-string">center:</span> List[<span class="hljs-keyword">float</span>]
+
+        + Paraview(<span class="hljs-string">input:</span> str, <span class="hljs-string">size:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">numberImages:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">numberRotations:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">anglePerRotation:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">radius:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">output:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">verbose:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">init_azimut:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">end_azimut:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">cant_step_azimut:</span> <span class="hljs-keyword">int</span>)
+        + set_background_color(<span class="hljs-string">color:</span> List[<span class="hljs-keyword">float</span>]): <span class="hljs-keyword">void</span>
+        + set_object_color(<span class="hljs-string">color:</span> List[<span class="hljs-keyword">float</span>]): <span class="hljs-keyword">void</span>
+        + activate_ilumination(<span class="hljs-string">principal_light:</span> <span class="hljs-keyword">float</span>=<span class="hljs-number">0.5</span>, <span class="hljs-string">fill_light:</span> <span class="hljs-keyword">float</span>=<span class="hljs-number">0.5</span>): <span class="hljs-keyword">void</span>
+        + set_camera_position(<span class="hljs-string">position:</span> List[<span class="hljs-keyword">float</span>]): <span class="hljs-keyword">void</span>
+        + calculate_new_position(<span class="hljs-string">angle_azimut:</span> <span class="hljs-keyword">float</span>,<span class="hljs-string">angle_elevation:</span> <span class="hljs-keyword">float</span>,<span class="hljs-string">radius:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">center:</span> List[<span class="hljs-keyword">float</span>]): List[<span class="hljs-keyword">float</span>]
+        + save_screenshot(<span class="hljs-string">filename:</span> str, <span class="hljs-string">view:</span> any, <span class="hljs-string">image_resolution:</span> List[<span class="hljs-keyword">int</span>]=[<span class="hljs-number">3000</span>, <span class="hljs-number">3000</span>]): <span class="hljs-keyword">void</span>
+        + start(): <span class="hljs-keyword">void</span>
+    }
+</code></pre>
+<h2 id="entry-points">Entry points</h2>
+<pre><code class="lang-mermaid">graph TD
+    A<span class="hljs-string">[Repositorio]</span> --&gt; B<span class="hljs-string">[script.sh]</span>
+    A --&gt; C<span class="hljs-string">[cli.py]</span>
+    A --&gt; D<span class="hljs-string">[run_test.py]</span>
+</code></pre>
+<h1 id="todo">TODO</h1>
+<p>still must update readme and define documentation and explanation
+still needs add menubar</p>
+
+</body>
+</html>

@@ -2,10 +2,23 @@ import threading
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from ui_backend import generate_images
+import webbrowser
+import os
+import sys
+
+
+def get_resource_path(relative_path):
+    """Get the absolute path to the resource when using pyinstaller"""
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 
 class GetImagesFromOBJ:
     def __init__(self, root):
+        self.docs_file_path = get_resource_path("docs/index.html")
         self.root = root
         self.root.title("Get Images From OBJ File")
         self.root.geometry("")
@@ -22,7 +35,30 @@ class GetImagesFromOBJ:
         self.setLayout()
 
     def setMenuBar(self):
-        pass
+        self.menu = tk.Menu()
+        self.root.config(menu=self.menu)
+
+        # TOGGLE ADVANCE SETTINGS
+        self.toggle_advance_settings_menu = tk.Menu(self.menu, tearoff=False)
+        self.toggle_advance_settings_menu.add_command(
+            label="Toggle Advance Settings",
+            command=self.toggle_advance_settings_menu_action,
+        )
+        self.menu.add_cascade(label="Options", menu=self.toggle_advance_settings_menu)
+
+        # HELP SECTION
+        self.help_menu = tk.Menu(self.menu, tearoff=False)
+        self.help_menu.add_command(label="Open docs", command=self.open_docs)
+        self.menu.add_cascade(label="Help", menu=self.help_menu)
+
+    def open_docs(self):
+        webbrowser.open(f"{self.docs_file_path}")
+
+    def toggle_advance_settings_menu_action(self):
+        self.is_advance_options_active.set(
+            1 if self.is_advance_options_active.get() == 0 else 0
+        )
+        self.toggle_advance_settings()
 
     def setLayout(self):
         self.set_basic_frame()
