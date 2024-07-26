@@ -96,6 +96,7 @@ jobs:
     - name: Bundle with PyInstaller
       run: |
         bundle_app_windows.bat
+      shell: cmd
 
     - name: Upload binaries to release
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
