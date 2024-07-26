@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+  * {
+    max-width: 100vw;
+  }
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  code {
+    display: block;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation</title>
+</head>
+
+<body>
+  <h1 id="get-images-from-obj">Get Images from OBJ</h1>
+  <p>This repository contains application to retrieve images from .OBJ files. It&#39;s free licence and free use.</p>
+  <h2 id="entry-points">Entry points</h2>
+  <p>It contains application to use it with GUI, a CLI to use it by terminal and a script to avoid boilerplate of
+    settings params by terminal.</p>
+  <pre><code class="lang-mermaid">graph TD
+A<span class="hljs-string">[Repository]</span> 
+A --&gt; B<span class="hljs-string">[app]</span>
+A --&gt; C<span class="hljs-string">[cli.py]</span>
+A --&gt; D<span class="hljs-string">[script.sh]</span>
+</code></pre>
+  <h2 id="set-up">Set up</h2>
+  <p>To use GUI download already bundle app in release section for your OS. To use from terminal, by script or CLI,
+    clone repo and execute what you need:</p>
+  <p>For CLI:</p>
+  <pre><code class="lang-bash"><span class="hljs-string">pvpython </span><span class="hljs-string">cli.</span><span class="hljs-string">py </span><span class="hljs-built_in">--input</span> <span class="hljs-string">"/home/.../small.obj"</span> <span class="hljs-built_in">--output</span> <span class="hljs-string">"/home/.../results"</span> <span class="hljs-built_in">--size</span> <span class="hljs-string">600 </span><span class="hljs-built_in">--numberRotations</span> 3 <span class="hljs-built_in">--numberImages</span> <span class="hljs-string">10 </span><span class="hljs-built_in">--anglePerRotation</span> <span class="hljs-string">20 </span><span class="hljs-built_in">--distanceOrRadio</span> <span class="hljs-string">60 </span><span class="hljs-built_in">--initMovement</span> 0 <span class="hljs-built_in">--endMovement</span> <span class="hljs-string">90 </span><span class="hljs-built_in">--cantStepMovement</span> 2
+</code></pre>
+  <p>For script, define params in cli.sh, then run it :</p>
+  <pre><code class="lang-bash">bash <span class="hljs-keyword">cli</span>.<span class="hljs-keyword">sh</span>
+</code></pre>
+  <h2 id="paraview-installation">Paraview Installation</h2>
+  <p>To run any entry point of this repo must have installed Paraview, and use <em>pvpython</em> inside bin folder
+    (where Paraview is download and decompress) to run the script.</p>
+  <p><a href="https://www.paraview.org/download/">Download Paraview</a></p>
+  <p>For app must have pvpython path added to PATH else won&#39;t work. For CLI and script it&#39;s a recommendation
+    else use absolute path to pvpython.</p>
+  <h2 id="how-it-works">How it works</h2>
+  <p><em>--input</em> is the absolute path to the .obj file, and <em>--ouput</em> is the folder where images will be
+    save.</p>
+  <p><img src="./images/exampleRotations.png" alt="Diagram of how basic params works" width="400"></p>
+  <p>When defining <em>--numberRotations</em> <em>--numberImages</em> <em>--anglePerRotation</em>, the rotations are the
+    rings in diagram above, the angles per rotations are the angle of inclination between rings, and the number of
+    images are how many captures are taken in each rotation. For the diagram we see <em>--numberRotations 3</em>
+    <em>--numberImages 20</em> <em>--anglePerRotation 20</em>
+  </p>
+  <h3 id="advance-params">Advance Params</h3>
+  <p>When needs to take a sequence of images from rotation but starting from diferent points, could use
+    <em>--initMovement</em> <em>--endMovement</em> <em>--cantStepMovement</em>. It defines an angle from init movement
+    to end movement and the quantity of steps (starts points to take the sequence of images).
+    Use Case example: when you have to take four images of object, in differents angles, using <em>--initMovement 0</em>
+    <em>--endMovement 90</em> <em>--cantStepMovement 10</em> for each rotation can generate nine more data.
+  </p>
+  <h3 id="params">Params</h3>
+  <pre><code class="lang-txt">--<span class="hljs-function"><span class="hljs-title">input</span> -&gt;</span> Path to .obj input file.
+--<span class="hljs-function"><span class="hljs-title">output</span> -&gt;</span> Path directory to store images of .obj file.
+--<span class="hljs-function"><span class="hljs-title">size</span> -&gt;</span> Images size, square output.
+--<span class="hljs-function"><span class="hljs-title">numberImages</span> -&gt;</span> Quantity of images per rotation.
+--<span class="hljs-function"><span class="hljs-title">numberRotations</span> -&gt;</span> Quantity of ratations.
+--<span class="hljs-function"><span class="hljs-title">anglePerRotation</span> -&gt;</span> Angle difference between two rotations. In °.
+--<span class="hljs-function"><span class="hljs-title">distanceOrRadio</span> -&gt;</span> Distance between camera <span class="hljs-built_in">and</span> object.
+--<span class="hljs-function"><span class="hljs-title">initMovement</span> -&gt;</span> The angle <span class="hljs-keyword">where</span> starts the movement <span class="hljs-keyword">for</span> each rotation.
+--<span class="hljs-function"><span class="hljs-title">endMovement</span> -&gt;</span> The angle <span class="hljs-keyword">where</span> ends the movement <span class="hljs-keyword">for</span> each rotation.
+--<span class="hljs-function"><span class="hljs-title">cantStepMovement</span> -&gt;</span> The quantity of movements between angles defined <span class="hljs-built_in">in</span> movement.
+--<span class="hljs-function"><span class="hljs-title">verbose</span> -&gt;</span> Show info of steps.
+</code></pre>
+
+  <h2 id="examples">Examples</h2>
+  <p>In the example below it&#39;s a result of four rotations at 20° angle between them, 4 images per rotation, default
+    values to advance params (only one movment).</p>
+  <p><img src="./images/getImagesFromObjPreview.png" alt="Result preview" width="500"></p>
+
+  <h2 id="app_preview">App preview</h2>
+  <p><img src="./images/preview1.png" alt="Preview fo the app" width="500"></p>
+
+</body>
+
+</html>

@@ -4,3 +4,6 @@ colmap.py
 script.sh
 config_preparing_data.json
 .vscode
+app.spec
+build/
+dist/

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Define params
 INPUT_PATH='...'
 OUTPUT_PATH='...'
 SIZE=512
