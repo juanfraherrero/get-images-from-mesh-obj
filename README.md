@@ -2,6 +2,11 @@
 
 This repository contains application to retrieve images from .OBJ files. It's free licence and free use.
 
+## Technologies
+- Python (Tkinter, black, flake8)
+- CI/CD (Github Actions)
+- Testing (unittest)
+
 ## Entry points
 It contains application to use it with GUI, a CLI to use it by terminal and a script to avoid boilerplate of settings params by terminal.
 
